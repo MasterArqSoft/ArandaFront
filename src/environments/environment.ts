@@ -3,7 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  urlApi: 'https://localhost:44385/api/',
+  token: '43c8f3f0-6f54-4a4b-bf66-185ba6ac1e4b',
+  refreshToken: '43c8f3f0-6f54-4a4b-bf66-185ba6ac1e4b',
+  // isLoggedIn: '336308b1-3797-4d21-af7e-2f01b9c3a6cd',
+  role: 'bb3ab45b-e1a5-418a-8669-197e20816d59',
+  production: false,
 };
 
 /*
