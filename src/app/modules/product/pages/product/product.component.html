@@ -1,0 +1,106 @@
+<app-table-crud
+  [tableCrud]="tableProduct"
+  [cols]="cols"
+  [dataList]="productList"
+  [meta]="productMeta"
+  (eventEmitCrud)="onAddNewProduct($event)"
+  (eventEmitEditEntity)="onEditProduct($event)"
+  (eventEmitSeeEntity)="onSeeProduct($event)"
+  (eventEmitDelEntity)="onDelProduct($event)"
+  (eventEmitNextPage)="onNext($event)"
+  (eventEmitPreviousPage)="onPreviou($event)"></app-table-crud>
+
+<div class="modal fade" id="FormModal" #FormModal>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form [formGroup]="productForm" autocomplete="off" name="student">
+        <div class="modal-header">
+          <h4 class="modal-title">{{ textCrud() }} Product</h4>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div *ngIf="imgFile !== ''">
+            <img [src]="imgFile" alt="" />
+          </div>
+          <div class="form-group">
+            <label>Name</label>
+            <input
+              type="text"
+              class="form-control"
+              required
+              name="name"
+              formControlName="name" />
+            <app-validate-fields-messages
+              *ngFor="let validation of product_validation.name"
+              [message]="validation.message"
+              [showMessage]="validateField('name', validation)">
+            </app-validate-fields-messages>
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <input
+              type="text"
+              class="form-control"
+              name="description"
+              formControlName="description" />
+            <app-validate-fields-messages
+              *ngFor="let validation of product_validation.description"
+              [message]="validation.message"
+              [showMessage]="validateField('description', validation)">
+            </app-validate-fields-messages>
+          </div>
+          <div class="form-group">
+            <label>Category</label>
+            <input
+              type="text"
+              class="form-control"
+              name="category"
+              formControlName="category" />
+            <app-validate-fields-messages
+              *ngFor="let validation of product_validation.category"
+              [message]="validation.message"
+              [showMessage]="validateField('category', validation)">
+            </app-validate-fields-messages>
+          </div>
+          <div class="form-group">
+            <label for="file">File</label>
+            <input
+              type="file"
+              class="form-control"
+              id="file"
+              #file
+              (change)="onImageChange($event)" />
+            <app-validate-fields-messages
+              *ngFor="let validation of product_validation.name"
+              [message]="validation.message"
+              [showMessage]="validateField('images', validation)">
+            </app-validate-fields-messages>
+          </div>
+          <div class="form-group mt-2">
+            <app-validate-sumary-error
+              [error]="error"></app-validate-sumary-error>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+            (click)="clearFied()">
+            Cancelar
+          </button>
+          <button
+            *ngIf="ShowCrud()"
+            type="button"
+            class="btn btn-success"
+            (click)="onProductSave()">
+            {{ textCrud() }} Cambios
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

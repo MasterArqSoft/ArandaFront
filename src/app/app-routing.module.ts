@@ -1,30 +1,24 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { MODEL_LAYOUT_ROUTE } from './routes/model-layout-routes';
+import { MainComponent } from './shared/pages/main/main.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'module',
     pathMatch: 'full',
   },
   {
-    path: '',
-    children: [
-      {
-        path: 'login',
-        loadChildren: () =>
-          import('./modules/account/account.module').then(h => h.AccountModule),
-      },
-    ],
+    path: 'module',
+    component: MainComponent,
+    children: MODEL_LAYOUT_ROUTE,
   },
-  {
-    path: '**',
-    redirectTo: 'login',
-  },
+  { path: '**', redirectTo: 'module' },
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AccountRoutingModule {}
+export class AppRoutingModule {}

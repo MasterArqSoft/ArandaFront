@@ -1,0 +1,10 @@
+<div class="d-flex" id="wrapper" #wrapper>
+  <app-sidebar></app-sidebar>
+  <!-- Page Content -->
+  <div id="page-content-wrapper">
+    <app-navbar (newMenuToggle)="onMenuToggle($event)"></app-navbar>
+    <div class="container-fluid px-4">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

@@ -11,7 +11,7 @@ export class ApiService {
   get(controller: string) {
     return this.http.get(`${environment.urlApi}${controller}/listar/`);
   }
-  //TODO: validar endpoint
+
   getGeneric(controller: string) {
     return this.http.get(`${environment.urlApi}${controller}`);
   }
@@ -20,31 +20,29 @@ export class ApiService {
     return this.http.get(`${environment.urlApi}${controller}/filtro/${id}`);
   }
 
-  getPaginate(controller: string, pageNumber: number, records: number) {
-    return this.http.get(
-      `${environment.urlApi}${controller}/paginar/${pageNumber}/cantidad/${records}`
+  getPaginate<T>(controller: string, pageNumber: number, records: number) {
+    return this.http.get<T>(
+      `${environment.urlApi}${controller}/listado?PageSize=${records}&PageNumber=${pageNumber}`
     );
   }
-  //TODO: validar endpoint
-  // getFilter<T>(controller: string, filterPaginate: IPaginate<T>) {
-  //   return this.http.post(
-  //     `${environment.urlApi}${controller}/paginar/filtros`,
-  //     filterPaginate
-  //   );
-  // }
-
-  delete(controller: string, id: string) {
-    return this.http.delete(
-      `${environment.urlApi}${controller}/eliminar?id=${id}`
+  delete<T>(controller: string, method: string, id: number) {
+    return this.http.delete<T>(
+      `${environment.urlApi}${controller}/${method}/${id}`
     );
   }
 
-  post(controller: string, data: any) {
-    return this.http.post(`${environment.urlApi}${controller}/crear`, data);
+  post<T>(controller: string, method: string, data: any) {
+    return this.http.post<T>(
+      `${environment.urlApi}${controller}/${method}`,
+      data
+    );
   }
 
-  put(controller: string, data: any) {
-    return this.http.put(`${environment.urlApi}${controller}/editar`, data);
+  put<T>(controller: string, method: string, id: number, data: any) {
+    return this.http.put<T>(
+      `${environment.urlApi}${controller}/${method}/${id}`,
+      data
+    );
   }
 
   UploadPost(controller: string, file: File) {
